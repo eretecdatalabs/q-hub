@@ -37,9 +37,9 @@ export default function Footer({ className }: { className?: string }) {
   const mainContentParts = (
     typeof config?.customFooter === 'string'
       ? config.customFooter
-      : '[LibreChat ' +
+      : '[Q-Hub ' +
         Constants.VERSION +
-        '](https://librechat.ai) - ' +
+        '](https://datalabs.co.kr) - ' +
         localize('com_ui_latest_footer')
   ).split('|');
 
