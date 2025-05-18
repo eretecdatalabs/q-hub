@@ -125,7 +125,7 @@
   "com_auth_username": "사용자명",
   "com_auth_username_max_length": "사용자명은 20자를 초과할 수 없습니다",
   "com_auth_username_min_length": "사용자명은 최소 2자 이상이어야 합니다",
-  "com_auth_welcome_back": "다시 오신 것을 환영합니다",
+  "com_auth_welcome_back": "이레테크 Q-Hub에 오신 것을 환영합니다",
   "com_click_to_download": "(다운로드하려면 클릭하세요)",
   "com_download_expired": "다운로드가 만료되었습니다",
   "com_download_expires": "(다운로드하려면 클릭하세요 - {{0}} 후 만료)",
