@@ -10,6 +10,7 @@ import { useMediaQuery, useHasAccess } from '~/hooks';
 import BookmarkMenu from './Menus/BookmarkMenu';
 import { TemporaryChat } from './TemporaryChat';
 import AddMultiConvo from './AddMultiConvo';
+import { BlinkAnimation } from '../Auth/BlinkAnimation';
 
 const defaultInterface = getConfigDefaults().interface;
 
@@ -37,6 +38,9 @@ export default function Header() {
     <div className="sticky top-0 z-10 flex h-14 w-full items-center justify-between bg-white p-2 font-semibold text-text-primary dark:bg-gray-800">
       <div className="hide-scrollbar flex w-full items-center justify-between gap-2 overflow-x-auto">
         <div className="mx-1 flex items-center gap-2">
+          <div className="h-10 w-full bg-cover">
+            <img src="/assets/logo.svg" className="h-full w-full object-contain" />
+          </div>
           {!navVisible && <OpenSidebar setNavVisible={setNavVisible} />}
           {!navVisible && <HeaderNewChat />}
           {<ModelSelector startupConfig={startupConfig} />}
