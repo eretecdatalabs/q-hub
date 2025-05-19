@@ -17,7 +17,7 @@ export default function OpenSidebar({
           variant="outline"
           data-testid="open-sidebar-button"
           aria-label={localize('com_nav_open_sidebar')}
-          className="rounded-xl border border-border-light bg-surface-secondary p-2 hover:bg-surface-hover max-md:hidden"
+          className="rounded-xl border-0 border-border-light p-2 hover:bg-surface-hover max-md:hidden"
           onClick={() =>
             setNavVisible((prev) => {
               localStorage.setItem('navVisible', JSON.stringify(!prev));

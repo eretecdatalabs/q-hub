@@ -6,6 +6,7 @@ import { getSelectedIcon, getDisplayValue } from './utils';
 import { CustomMenu as Menu } from './CustomMenu';
 import DialogManager from './DialogManager';
 import { useLocalize } from '~/hooks';
+import { ChevronDown } from 'lucide-react';
 
 function ModelSelectorContent() {
   const localize = useLocalize();
@@ -52,7 +53,7 @@ function ModelSelectorContent() {
 
   const trigger = (
     <button
-      className="my-1 flex h-10 w-full max-w-[70vw] items-center justify-center gap-2 rounded-xl border border-border-light bg-surface-secondary px-3 py-2 text-sm text-text-primary hover:bg-surface-tertiary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+      className="my-1 flex h-10 w-full max-w-[70vw] items-center justify-center gap-2 rounded-xl border-0 border-border-light px-3 py-2 text-base text-text-primary hover:bg-surface-tertiary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
       aria-label={localize('com_ui_select_model')}
     >
       {selectedIcon && React.isValidElement(selectedIcon) && (
@@ -61,6 +62,7 @@ function ModelSelectorContent() {
         </div>
       )}
       <span className="flex-grow truncate text-left">{selectedDisplayValue}</span>
+      <ChevronDown className="h-4 w-4 flex-shrink-0 text-text-primary" />
     </button>
   );
 

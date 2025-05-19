@@ -33,7 +33,7 @@ export default function HeaderNewChat() {
           variant="outline"
           data-testid="wide-header-new-chat-button"
           aria-label={localize('com_ui_new_chat')}
-          className="rounded-xl border border-border-light bg-surface-secondary p-2 hover:bg-surface-hover max-md:hidden"
+          className="rounded-xl border-0 border-border-light p-2 hover:bg-surface-hover max-md:hidden"
           onClick={clickHandler}
         >
           <NewChatIcon />
