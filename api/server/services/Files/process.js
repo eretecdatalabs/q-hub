@@ -409,6 +409,7 @@ const processFileUpload = async ({ req, res, metadata }) => {
     file,
     file_id,
     openai,
+    session_id: req.body.session_id,
   });
 
   if (isAssistantUpload && !metadata.message_file && !metadata.tool_resource) {
@@ -583,6 +584,7 @@ const processAgentFileUpload = async ({ req, res, metadata }) => {
     file_id,
     entity_id,
     basePath,
+    session_id: req.body.session_id,
   });
 
   let filepath = _filepath;
