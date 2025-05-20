@@ -38,13 +38,13 @@ export default function Header() {
     <div className="sticky top-0 z-10 flex h-14 w-full items-center justify-between bg-white p-2 font-semibold text-text-primary dark:bg-gray-800">
       <div className="hide-scrollbar flex w-full items-center justify-between gap-2 overflow-x-auto">
         <div className="mx-1 flex items-center gap-2">
-          <img src="/assets/logo.svg" className="w-25 h-8 object-contain" />
+          <img src="/assets/logo.svg" className="w-25 h-8 object-contain dark:saturate-0 dark:invert" />
           {!navVisible && <OpenSidebar setNavVisible={setNavVisible} />}
           {!navVisible && <HeaderNewChat />}
           {<ModelSelector startupConfig={startupConfig} />}
-          {/* {interfaceConfig.presets === true && interfaceConfig.modelSelect && <PresetsMenu />} */}
+          {interfaceConfig.presets === true && interfaceConfig.modelSelect && <PresetsMenu />}
           {hasAccessToBookmarks === true && <BookmarkMenu />}
-          {/* {hasAccessToMultiConvo === true && <AddMultiConvo />} */}
+          {hasAccessToMultiConvo === true && <AddMultiConvo />}
           {isSmallScreen && (
             <>
               <ExportAndShareMenu
