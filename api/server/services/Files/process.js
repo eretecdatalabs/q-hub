@@ -525,7 +525,6 @@ const processAgentFileUpload = async ({ req, res, metadata }) => {
     }
     const destinationObject =  req.user.id+'/uploads/'+file.originalname
     await minioClient.fPutObject(bucket, destinationObject, file.path, {});
-    const link = await minioClient.presignedGetObject(bucket, destinationObject, 24*60*60);
   } else if (tool_resource === EToolResources.ocr) {
     const isOCREnabled = await checkCapability(req, AgentCapabilities.ocr);
     if (!isOCREnabled) {
