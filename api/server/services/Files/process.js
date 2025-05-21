@@ -32,6 +32,7 @@ const { loadAuthValues } = require('~/server/services/Tools/credentials');
 const { checkCapability } = require('~/server/services/Config');
 const { LB_QueueAsyncCall } = require('~/server/utils/queue');
 const { getStrategyFunctions } = require('./strategies');
+const { uploadFileToMinio } = require('./Minio/crud');
 const { determineFileType } = require('~/server/utils');
 const { logger } = require('~/config');
 
@@ -411,6 +412,22 @@ const processFileUpload = async ({ req, res, metadata }) => {
     openai,
   });
 
+  let minioPath;
+  if (metadata.session_id) {
+    try {
+      const uploadResult = await uploadFileToMinio({
+        req,
+        file,
+        file_id: id ?? file_id,
+        bucket: 'q-hub',
+        basePath: `sessions/${metadata.session_id}`,
+      });
+      minioPath = uploadResult.filepath;
+    } catch (error) {
+      logger.error('[processFileUpload] Error uploading to Minio:', error);
+    }
+  }
+
   if (isAssistantUpload && !metadata.message_file && !metadata.tool_resource) {
     await openai.beta.assistants.files.create(metadata.assistant_id, {
       file_id: id,
@@ -559,7 +576,7 @@ const processAgentFileUpload = async ({ req, res, metadata }) => {
     const result = await createFile(fileInfo, true);
     return res
       .status(200)
-      .json({ message: 'Agent file uploaded and processed successfully', ...result });
+      .json({ message: 'Agent file uploaded and processed successfully', ...result, minio_path: minioPath });
   }
 
   const source =
@@ -584,6 +601,22 @@ const processAgentFileUpload = async ({ req, res, metadata }) => {
     entity_id,
     basePath,
   });
+
+  let minioPath;
+  if (metadata.session_id) {
+    try {
+      const uploadResult = await uploadFileToMinio({
+        req,
+        file,
+        file_id,
+        bucket: 'q-hub',
+        basePath: `sessions/${metadata.session_id}`,
+      });
+      minioPath = uploadResult.filepath;
+    } catch (error) {
+      logger.error('[processAgentFileUpload] Error uploading to Minio:', error);
+    }
+  }
 
   let filepath = _filepath;
 
@@ -624,7 +657,7 @@ const processAgentFileUpload = async ({ req, res, metadata }) => {
   });
 
   const result = await createFile(fileInfo, true);
-  res.status(200).json({ message: 'Agent file uploaded and processed successfully', ...result });
+  res.status(200).json({ message: 'Agent file uploaded and processed successfully', ...result, minio_path: minioPath });
 };
 
 /**

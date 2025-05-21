@@ -33,6 +33,17 @@ const {
   uploadFileToS3,
 } = require('./S3');
 const {
+  getMinioURL,
+  saveURLToMinio,
+  saveBufferToMinio,
+  getMinioFileStream,
+  uploadImageToMinio,
+  prepareImageURLMinio,
+  deleteFileFromMinio,
+  processMinioAvatar,
+  uploadFileToMinio,
+} = require('./Minio');
+const {
   saveBufferToAzure,
   saveURLToAzure,
   getAzureURL,
@@ -94,6 +105,22 @@ const s3Strategy = () => ({
   processAvatar: processS3Avatar,
   handleImageUpload: uploadImageToS3,
   getDownloadStream: getS3FileStream,
+});
+
+/**
+ * Minio Storage Strategy Functions
+ *
+ * */
+const minioStrategy = () => ({
+  handleFileUpload: uploadFileToMinio,
+  saveURL: saveURLToMinio,
+  getFileURL: getMinioURL,
+  deleteFile: deleteFileFromMinio,
+  saveBuffer: saveBufferToMinio,
+  prepareImagePayload: prepareImageURLMinio,
+  processAvatar: processMinioAvatar,
+  handleImageUpload: uploadImageToMinio,
+  getDownloadStream: getMinioFileStream,
 });
 
 /**
@@ -218,6 +245,8 @@ const getStrategyFunctions = (fileSource) => {
     return vectorStrategy();
   } else if (fileSource === FileSources.s3) {
     return s3Strategy();
+  } else if (fileSource === FileSources.minio) {
+    return minioStrategy();
   } else if (fileSource === FileSources.execute_code) {
     return codeOutputStrategy();
   } else if (fileSource === FileSources.mistral_ocr) {
