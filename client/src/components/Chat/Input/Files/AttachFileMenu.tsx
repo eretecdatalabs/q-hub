@@ -49,16 +49,16 @@ const AttachFile = ({ disabled }: AttachFileProps) => {
       },
     ];
 
-    if (capabilities.includes(EToolResources.ocr)) {
-      items.push({
-        label: localize('com_ui_upload_ocr_text'),
-        onClick: () => {
-          setToolResource(EToolResources.ocr);
-          handleUploadClick();
-        },
-        icon: <FileType2Icon className="icon-md" />,
-      });
-    }
+    // if (capabilities.includes(EToolResources.ocr)) {
+    //   items.push({
+    //     label: localize('com_ui_upload_ocr_text'),
+    //     onClick: () => {
+    //       setToolResource(EToolResources.ocr);
+    //       handleUploadClick();
+    //     },
+    //     icon: <FileType2Icon className="icon-md" />,
+    //   });
+    // }
 
     if (capabilities.includes(EToolResources.file_search)) {
       items.push({
@@ -71,16 +71,16 @@ const AttachFile = ({ disabled }: AttachFileProps) => {
       });
     }
 
-    if (capabilities.includes(EToolResources.execute_code)) {
-      items.push({
-        label: localize('com_ui_upload_code_files'),
-        onClick: () => {
-          setToolResource(EToolResources.execute_code);
-          handleUploadClick();
-        },
-        icon: <TerminalSquareIcon className="icon-md" />,
-      });
-    }
+    // if (capabilities.includes(EToolResources.execute_code)) {
+    //   items.push({
+    //     label: localize('com_ui_upload_code_files'),
+    //     onClick: () => {
+    //       setToolResource(EToolResources.execute_code);
+    //       handleUploadClick();
+    //     },
+    //     icon: <TerminalSquareIcon className="icon-md" />,
+    //   });
+    // }
 
     return items;
   }, [capabilities, localize, setToolResource]);
