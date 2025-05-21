@@ -16,6 +16,7 @@ const { loadTurnstileConfig } = require('./start/turnstile');
 const { azureConfigSetup } = require('./start/azureOpenAI');
 const { processModelSpecs } = require('./start/modelSpecs');
 const { initializeS3 } = require('./Files/S3/initialize');
+const { initializeMinio } = require('./Files/Minio/initialize');
 const { loadAndFormatTools } = require('./ToolService');
 const { agentsConfigSetup } = require('./start/agents');
 const { initializeRoles } = require('~/models/Role');
@@ -56,6 +57,8 @@ const AppService = async (app) => {
     initializeAzureBlobService();
   } else if (fileStrategy === FileSources.s3) {
     initializeS3();
+  } else if (fileStrategy === FileSources.minio) {
+    initializeMinio();
   }
 
   /** @type {Record<string, FunctionTool>} */

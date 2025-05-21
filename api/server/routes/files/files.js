@@ -42,6 +42,18 @@ router.get('/', async (req, res) => {
       } catch (error) {
         logger.warn('[/files] Error refreshing S3 file URLs:', error);
       }
+    } else if (req.app.locals.fileStrategy === FileSources.minio) {
+      try {
+        const cache = getLogStores(CacheKeys.S3_EXPIRY_INTERVAL);
+        const alreadyChecked = await cache.get(req.user.id);
+        if (!alreadyChecked) {
+          const { refreshMinioFileUrls } = require('~/server/services/Files/Minio/crud');
+          await refreshMinioFileUrls(files, batchUpdateFiles);
+          await cache.set(req.user.id, true, Time.THIRTY_MINUTES);
+        }
+      } catch (error) {
+        logger.warn('[/files] Error refreshing Minio file URLs:', error);
+      }
     }
     res.status(200).send(files);
   } catch (error) {

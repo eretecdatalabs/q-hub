@@ -19,6 +19,7 @@ const {
 const { uploadImageBuffer, filterFile } = require('~/server/services/Files/process');
 const { getStrategyFunctions } = require('~/server/services/Files/strategies');
 const { refreshS3Url } = require('~/server/services/Files/S3/crud');
+const { refreshMinioUrl } = require('~/server/services/Files/Minio/crud');
 const { updateAction, getActions } = require('~/models/Action');
 const { updateAgentProjects } = require('~/models/Agent');
 const { getProjectByName } = require('~/models/Project');
@@ -107,6 +108,12 @@ const getAgentHandler = async (req, res) => {
     if (agent.avatar && agent.avatar?.source === FileSources.s3) {
       const originalUrl = agent.avatar.filepath;
       agent.avatar.filepath = await refreshS3Url(agent.avatar);
+      if (originalUrl !== agent.avatar.filepath) {
+        await updateAgent({ id }, { avatar: agent.avatar });
+      }
+    } else if (agent.avatar && agent.avatar?.source === FileSources.minio) {
+      const originalUrl = agent.avatar.filepath;
+      agent.avatar.filepath = await refreshMinioUrl(agent.avatar);
       if (originalUrl !== agent.avatar.filepath) {
         await updateAgent({ id }, { avatar: agent.avatar });
       }
