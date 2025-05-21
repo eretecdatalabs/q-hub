@@ -34,6 +34,15 @@ const { LB_QueueAsyncCall } = require('~/server/utils/queue');
 const { getStrategyFunctions } = require('./strategies');
 const { determineFileType } = require('~/server/utils');
 const { logger } = require('~/config');
+const Minio = require('minio');
+const minioClient = new Minio.Client({
+  endPoint: process.env.MINIO_ENDPOINT_URL,
+  port: parseInt(process.env.MINIO_PORT, 10),
+  useSSL: process.env.MINIO_USE_SSL === 'true',
+  accessKey: process.env.MINIO_ACCESS_KEY,
+  secretKey: process.env.MINIO_SECRET_KEY,
+});
+const bucket = 'q-hub';
 
 /**
  *
@@ -514,6 +523,9 @@ const processAgentFileUpload = async ({ req, res, metadata }) => {
     if (!isFileSearchEnabled) {
       throw new Error('File search is not enabled for Agents');
     }
+    const destinationObject =  req.user.id+'/uploads/'+file.originalname
+    await minioClient.fPutObject(bucket, destinationObject, file.path, {});
+    const link = await minioClient.presignedGetObject(bucket, destinationObject, 24*60*60);
   } else if (tool_resource === EToolResources.ocr) {
     const isOCREnabled = await checkCapability(req, AgentCapabilities.ocr);
     if (!isOCREnabled) {
