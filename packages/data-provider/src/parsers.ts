@@ -446,6 +446,7 @@ export function replaceSpecialVars({ text, user }: { text: string; user?: t.TUse
 
   if (user && user.name) {
     result = result.replace(/{{current_user}}/gi, user.name);
+    result = result.replace(/{{current_user_id}}/gi, user.id);
   }
 
   return result;
