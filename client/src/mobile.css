@@ -372,3 +372,10 @@ p.whitespace-pre-wrap a, li a {
 .dark p.whitespace-pre-wrap a, .dark li a {
   color: #52a0ff;
 }
+/* Hide Menu with id 'endpoint-openAI-menu' */
+#endpoint-openAI-menu.transition-opacity {
+  display: none;
+}
+#endpoint-anthropic-menu.transition-opacity {
+  display: none;
+}
