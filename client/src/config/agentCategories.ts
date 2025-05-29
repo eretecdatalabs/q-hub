@@ -25,7 +25,8 @@ export const AGENT_CATEGORY_MAP: Record<string, AgentCategory> = {
   // 'agent-marketing-bot': 'marketing',
   // 'agent-dev-helper': 'development',
   // 'agent-support-bot': 'support',
-  'agent_3UJGLGdOmUF81ZD64gjv0': 'data_analysis'
+  'agent_3UJGLGdOmUF81ZD64gjv0': 'data_analysis',
+  'agent_7czRuAsD3FxjEy4j1IsjT': 'support'
   
   // Add your agent ID mappings here:
 };
