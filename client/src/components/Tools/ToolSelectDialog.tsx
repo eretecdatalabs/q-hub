@@ -117,9 +117,33 @@ function ToolSelectDialog({
     }
   };
 
-  const filteredTools = tools?.filter((tool) =>
-    tool.name.toLowerCase().includes(searchValue.toLowerCase()),
-  );
+  // Extract MCP server name from pluginKey
+  const extractMCPServerName = (pluginKey: string): string => {
+    const mcpDelimiter = '_mcp_';
+    const parts = pluginKey.split(mcpDelimiter);
+    return parts.length > 1 ? parts[parts.length - 1] : '';
+  };
+
+  const filteredTools = tools
+    ?.filter((tool) =>
+      tool.name.toLowerCase().includes(searchValue.toLowerCase()),
+    )
+    ?.sort((a, b) => {
+      const serverA = extractMCPServerName(a.pluginKey);
+      const serverB = extractMCPServerName(b.pluginKey);
+      
+      // Sort by MCP server name first, then by tool name
+      if (serverA !== serverB) {
+        // Put tools without MCP server at the end
+        if (!serverA && serverB) return 1;
+        if (serverA && !serverB) return -1;
+        return serverA.localeCompare(serverB);
+      }
+      
+      // If same server (or both have no server), sort by tool name
+      return a.name.localeCompare(b.name);
+    });
+
 
   useEffect(() => {
     if (filteredTools) {

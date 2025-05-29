@@ -11,6 +11,16 @@ type ToolItemProps = {
 
 function ToolItem({ tool, onAddTool, onRemoveTool, isInstalled = false }: ToolItemProps) {
   const localize = useLocalize();
+  
+  // Extract MCP server name from pluginKey
+  const extractMCPServerName = (pluginKey: string): string | null => {
+    const mcpDelimiter = '_mcp_';
+    const parts = pluginKey.split(mcpDelimiter);
+    return parts.length > 1 ? parts[parts.length - 1] : null;
+  };
+  
+  const mcpServerName = extractMCPServerName(tool.pluginKey);
+  
   const handleClick = () => {
     if (isInstalled) {
       onRemoveTool();
@@ -39,6 +49,11 @@ function ToolItem({ tool, onAddTool, onRemoveTool, isInstalled = false }: ToolIt
           </div>
         </div>
         <div className="flex min-w-0 flex-col items-start justify-between">
+          {mcpServerName && (
+            <div className="mb-1 text-xs text-text-secondary uppercase tracking-wide">
+              {mcpServerName}
+            </div>
+          )}
           <div className="mb-2 line-clamp-1 max-w-full text-lg leading-5 text-text-primary">
             {tool.name}
           </div>
