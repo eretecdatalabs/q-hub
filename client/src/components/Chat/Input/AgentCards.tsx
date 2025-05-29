@@ -10,7 +10,7 @@ const AgentCards = () => {
   const { t } = useTranslation();
   const agentsMap = useAgentsMapContext() || {};
   const { onSelect } = useSelectAgent();
-  const [selectedCategory, setSelectedCategory] = useState<AgentCategory>('all');
+  const [selectedCategory, setSelectedCategory] = useState<AgentCategory>('basic');
 
   const agents = useMemo(() => Object.values(agentsMap) as Agent[], [agentsMap]);
 
