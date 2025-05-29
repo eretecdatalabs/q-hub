@@ -379,3 +379,6 @@ p.whitespace-pre-wrap a, li a {
 #endpoint-anthropic-menu.transition-opacity {
   display: none;
 }
+#endpoint-google-menu.transition-opacity {
+  display: none;
+}
