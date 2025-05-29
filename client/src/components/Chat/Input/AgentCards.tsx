@@ -27,10 +27,19 @@ const AgentCards = () => {
   }, [agents]);
 
   const filteredAgents = useMemo(() => {
+    let filtered;
     if (selectedCategory === 'all') {
-      return agents;
+      filtered = agents;
+    } else {
+      filtered = agents.filter(agent => getAgentCategory(agent) === selectedCategory);
     }
-    return agents.filter(agent => getAgentCategory(agent) === selectedCategory);
+    
+    // Sort alphabetically by agent name
+    return filtered.sort((a, b) => {
+      const nameA = (a.name || 'Unnamed Agent').toLowerCase();
+      const nameB = (b.name || 'Unnamed Agent').toLowerCase();
+      return nameA.localeCompare(nameB);
+    });
   }, [agents, selectedCategory]);
 
   // Get categories that have at least one agent
