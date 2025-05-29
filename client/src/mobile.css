@@ -289,6 +289,30 @@
   animation: slowPulse 2.5s ease-in-out infinite;
 }
 
+@keyframes aiThinkingSpin {
+  0% {
+    transform: rotate(0deg) scale(1);
+    filter: brightness(1);
+  }
+  30% {
+    filter: brightness(1.2);
+    transform: rotate(120deg) scale(1.15);
+  }
+  60% {
+    filter: brightness(0.8);
+    transform: rotate(240deg) scale(0.95);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    filter: brightness(1);
+  }
+}
+
+.ai-thinking-spin {
+  animation: aiThinkingSpin 2.5s cubic-bezier(0.4, 0.2, 0.2, 1) infinite;
+  will-change: transform, filter;
+}
+
 .scrollbar-gutter-stable {
   scrollbar-gutter: stable;
 }
