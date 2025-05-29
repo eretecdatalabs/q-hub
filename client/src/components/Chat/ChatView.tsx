@@ -8,6 +8,7 @@ import type { ChatFormValues } from '~/common';
 import { ChatContext, AddedChatContext, useFileMapContext, ChatFormProvider } from '~/Providers';
 import { useChatHelpers, useAddedResponse, useSSE } from '~/hooks';
 import ConversationStarters from './Input/ConversationStarters';
+import AgentCards from './Input/AgentCards';
 import { useGetMessagesByConvoId } from '~/data-provider';
 import MessagesView from './Messages/MessagesView';
 import { Spinner } from '~/components/svg';
@@ -98,7 +99,16 @@ function ChatView({ index = 0 }: { index?: number }) {
                     )}
                   >
                     <ChatForm index={index} />
-                    {isLandingPage ? <ConversationStarters /> : <Footer />}
+                    {isLandingPage ? (
+                      <>
+                        <ConversationStarters />
+                        <div className="mb-4 mt-24 flex justify-center">
+                          <AgentCards />
+                        </div>  
+                      </>
+                    ) : (
+                      <Footer />
+                    )}
                   </div>
                 </div>
                 {isLandingPage && <Footer />}

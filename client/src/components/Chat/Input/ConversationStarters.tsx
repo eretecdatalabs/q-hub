@@ -47,7 +47,9 @@ const ConversationStarters = () => {
     }
 
     if (isAgent) {
-      return [];
+      if (entity?.conversation_starters?.length) {
+        return entity.conversation_starters;
+      }
     }
 
     return documentsMap.get(entity?.id ?? '')?.conversation_starters ?? [];

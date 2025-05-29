@@ -23,6 +23,13 @@
   "com_agents_not_available": "Agent Not Available",
   "com_agents_search_name": "Search agents by name",
   "com_agents_update_error": "There was an error updating your agent.",
+  "com_agents_category_all": "All",
+  "com_agents_category_finance": "Finance",
+  "com_agents_category_basic": "Basic",
+  "com_agents_category_data_analysis": "Data Analysis",
+  "com_agents_category_marketing": "Marketing",
+  "com_agents_category_development": "Development",
+  "com_agents_category_support": "Support",
   "com_assistants_action_attempt": "Assistant wants to talk to {{0}}",
   "com_assistants_actions": "Actions",
   "com_assistants_actions_disabled": "You need to create an assistant before adding actions.",
@@ -872,5 +879,6 @@
   "com_ui_yes": "Yes",
   "com_ui_zoom": "Zoom",
   "com_user_message": "You",
-  "com_warning_resubmit_unsupported": "Resubmitting the AI message is not supported for this endpoint."
+  "com_warning_resubmit_unsupported": "Resubmitting the AI message is not supported for this endpoint.",
+  "com_agents_choose_agent": "Choose an Agent"
 }

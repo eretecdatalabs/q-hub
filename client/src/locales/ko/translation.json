@@ -21,6 +21,13 @@
   "com_agents_not_available": "에이전트를 사용할 수 없음",
   "com_agents_search_name": "이름으로 에이전트 검색",
   "com_agents_update_error": "에이전트 업데이트 중 오류가 발생했습니다",
+  "com_agents_category_all": "전체",
+  "com_agents_category_finance": "재무",
+  "com_agents_category_basic": "기본",
+  "com_agents_category_data_analysis": "데이터 분석",
+  "com_agents_category_marketing": "마케팅",
+  "com_agents_category_development": "개발",
+  "com_agents_category_support": "지원",
   "com_assistants_actions": "작업",
   "com_assistants_actions_disabled": "어시스턴트를 만들어야 작업을 추가할 수 있습니다.",
   "com_assistants_actions_info": "어시스턴트가 API를 통해 정보를 검색하거나 작업을 수행할 수 있게 해줍니다.",
@@ -710,5 +717,6 @@
   "com_ui_yes": "네",
   "com_ui_zoom": "확대/축소",
   "com_user_message": "당신",
-  "com_warning_resubmit_unsupported": "이 엔드포인트에서는 AI 메시지 재전송이 지원되지 않습니다"
+  "com_warning_resubmit_unsupported": "이 엔드포인트에서는 AI 메시지 재전송이 지원되지 않습니다",
+  "com_agents_choose_agent": "우리 회사 비서 선택"
 }
