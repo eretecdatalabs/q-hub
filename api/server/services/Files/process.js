@@ -502,6 +502,9 @@ const processAgentFileUpload = async ({ req, res, metadata }) => {
   let fileInfoMetadata;
   const entity_id = messageAttachment === true ? undefined : agent_id;
   const basePath = mime.getType(file.originalname)?.startsWith('image') ? 'images' : 'uploads';
+  const destinationObject =  req.user.id+'/uploads/'+file.originalname
+  const fullMinioPath = path.join(bucket, destinationObject);
+  await minioClient.fPutObject(bucket, destinationObject, file.path, {});
   if (tool_resource === EToolResources.execute_code) {
     const isCodeEnabled = await checkCapability(req, AgentCapabilities.execute_code);
     if (!isCodeEnabled) {
@@ -523,8 +526,6 @@ const processAgentFileUpload = async ({ req, res, metadata }) => {
     if (!isFileSearchEnabled) {
       throw new Error('File search is not enabled for Agents');
     }
-    const destinationObject =  req.user.id+'/uploads/'+file.originalname
-    await minioClient.fPutObject(bucket, destinationObject, file.path, {});
   } else if (tool_resource === EToolResources.ocr) {
     const isOCREnabled = await checkCapability(req, AgentCapabilities.ocr);
     if (!isOCREnabled) {

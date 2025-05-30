@@ -697,9 +697,24 @@ class AgentClient extends BaseClient {
           agent.model_parameters.model.match(regex),
         );
 
-        const systemMessage = Object.values(agent.toolContextMap ?? {})
+        let systemMessage = Object.values(agent.toolContextMap ?? {})
           .join('\n')
           .trim();
+
+        // Add uploaded tool context to system message
+        const uploadedFiles = agent.tool_resources?.file_search?.files;
+        if (uploadedFiles?.length) {
+          const fileContext = uploadedFiles
+            .slice()
+            .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt))
+            .map((file, idx) => `file_order:${idx}, filename:${file.filename}`)
+            .join('\n');
+          if (systemMessage) {
+            systemMessage += `\n\n# Uploaded Files:\n${fileContext}`;
+          } else {
+            systemMessage = `# Uploaded Files:\n${fileContext}`;
+          }
+        }
 
         let systemContent = [
           systemMessage,
