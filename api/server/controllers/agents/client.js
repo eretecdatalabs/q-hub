@@ -702,7 +702,7 @@ class AgentClient extends BaseClient {
           .trim();
 
         // Add uploaded tool context to system message
-        const uploadedFiles = agent.tool_resources?.file_search?.files;
+        const uploadedFiles = agent.attachments ?? [];
         if (uploadedFiles?.length) {
           const fileContext = uploadedFiles
             .slice()
